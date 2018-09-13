@@ -7,7 +7,7 @@ http://4pda.ru/forum/index.php?showuser=6015251
 
 import sqlite3 as lite
 import re
-import view_transactions
+import transactions
 import new_transactions
 import products
 from os import system
@@ -51,7 +51,7 @@ while True:
     # [1] - подменю "Просмотр транзакций"
     elif sel == '1':
         system(os_clear)
-        view_transactions.view_transactions(cursor, os_clear)
+        transactions.view_transactions(cursor, os_clear)
         menu()
     
     #[2] - подменю "Новая транзакция"
