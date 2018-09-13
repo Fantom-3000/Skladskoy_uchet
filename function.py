@@ -142,30 +142,3 @@ def line_product_center():
           ''.ljust(col.unit_name, '─') + '┼' +
           ''.ljust(col.unit_price, '─') + '┼' +
           ''.ljust(col.balance, '─') + '┤')
-
-'''# Вывод списка материалов
-def products_list(data):
-    col = ProductTabel()
-    line_down() # ┌───────┐
-    print('│'+'Дата запроса: ' + 
-          str(operation_date(time.time()).ljust(col.tabel_width-14, ' ')) + '│')
-    line_product_down_2() # ├──┬──┬──┤
-    print('│'+'Инв. ном.'.center(col.card_number, ' ') + '│' +
-          'Наименование материала'.center(col.product_name, ' ') + '│' +
-          'Ед. изм.'.center(col.unit_name, ' ') + '│' +
-          'За ед.'.center(col.unit_price, ' ')+'│'+
-          'Остаток'.center(col.balance, ' ')+'│')
-    line_product_center() # ├──┼──┼──┤
-    balance = '0.0'
-    for data_list in data:
-        card_number = data_list[0]
-        product_name = data_list[1]
-        unit_name = str(data_list[2])
-        unit_price = str(data_list[3])
-        print('│'+card_number.rjust(col.card_number, ' ') + '│' +
-              product_name.ljust(col.product_name, ' ') + '│' +
-              unit_name.center(col.unit_name, ' ') + '│' +
-              unit_price.rjust(col.unit_price, ' ') + '│' +
-              balance.rjust(col.balance, ' ') + '│')
-    line_product_up() # └──┴──┴──┘
-'''
