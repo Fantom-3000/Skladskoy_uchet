@@ -143,7 +143,7 @@ def line_product_center():
           ''.ljust(col.unit_price, '─') + '┼' +
           ''.ljust(col.balance, '─') + '┤')
 
-# Вывод списка материалов
+'''# Вывод списка материалов
 def products_list(data):
     col = ProductTabel()
     line_down() # ┌───────┐
@@ -168,3 +168,4 @@ def products_list(data):
               unit_price.rjust(col.unit_price, ' ') + '│' +
               balance.rjust(col.balance, ' ') + '│')
     line_product_up() # └──┴──┴──┘
+'''

@@ -10,6 +10,7 @@ import time
 import function
 import re
 import os
+from settings import ProductTabel
 
 # Подменю "Справочник материалов"
 def menu_products():
@@ -49,7 +50,33 @@ def products(cursor, os_clear, con):
             os.system(os_clear)
             cursor.execute(sql)
             data = cursor.fetchall()
-            function.products_list(data)
+            # function.products_list(data)
+
+            # Вывод списка материалов
+            col = ProductTabel()
+            function.line_down() # ┌───────┐
+            print('│'+'Дата запроса: ' + 
+                  str(function.operation_date(time.time()).ljust(col.tabel_width-14, ' ')) + '│')
+            function.line_product_down_2() # ├──┬──┬──┤
+            print('│'+'Инв. ном.'.center(col.card_number, ' ') + '│' +
+                  'Наименование материала'.center(col.product_name, ' ') + '│' +
+                  'Ед. изм.'.center(col.unit_name, ' ') + '│' +
+                  'За ед.'.center(col.unit_price, ' ')+'│'+
+                  'Остаток'.center(col.balance, ' ')+'│')
+            function.line_product_center() # ├──┼──┼──┤
+            balance = '0.0'
+
+            for data_list in data:
+                card_number = data_list[0]
+                product_name = data_list[1]
+                unit_name = str(data_list[2])
+                unit_price = str(data_list[3])
+                print('│'+card_number.rjust(col.card_number, ' ') + '│' +
+                      product_name.ljust(col.product_name, ' ') + '│' +
+                      unit_name.center(col.unit_name, ' ') + '│' +
+                      unit_price.rjust(col.unit_price, ' ') + '│' +
+                      balance.rjust(col.balance, ' ') + '│')
+            function.line_product_up() # └──┴──┴──┘
             menu_products()
 
         # Редактирование материала
