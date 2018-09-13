@@ -1,3 +1,10 @@
+"""
+Created on Tue Aug 21 20:29:50 2018
+
+@author: Fantom-3000
+http://4pda.ru/forum/index.php?showuser=6015251
+"""
+
 import sqlite3 as lite
 import re
 import view_transactions
