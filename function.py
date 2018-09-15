@@ -13,18 +13,6 @@ def operation_date(unix_time):
     operation_date = time.strftime("%d.%m.%Y", time.localtime(unix_time))
     return operation_date
 
-# Добавление новой транзакции
-def new_transaction():
-    transaction_date = time.time()
-    transaction_type = input('Тип транзакции --> ')
-    product_name = input('Наименование материала --> ')
-    unit_name = input('Единица измерения --> ')
-    unit_price = float(input('Цена за единицу --> '))
-    amount = float(input('Количество --> '))
-    description = input('Назначение -->')
-
-    print(transaction_date)
-
 # ┌───────┐
 def line_down():
     col = TransactionTabel()

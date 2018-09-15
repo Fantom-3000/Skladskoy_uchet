@@ -12,8 +12,17 @@ import re
 import os
 from settings import TransactionTabel
 
+def menu_transaction():
+    print('1. Просмотр транзакций')
+    print('2. Редактирование транзакции')
+    print('3. Добавление транзакции')
+    print('4. Удаление транзакции')
+    print()
+    print('m. Меню программы')
+    print('q. Возврат в предыдущее меню')
+
 # Подменю "Просмотр транзакций"
-def menu_view_transactions():
+def menu_view_transaction():
     print('1. Приход')
     print('2. Расход')
     print('3. Перемещение')
@@ -66,15 +75,49 @@ def data_print(data):
               str(total).rjust(col.total, ' ')+'│')
     function.line_transaction_up() # └──┴──┴──┘
 
-def view_transactions(cursor, os_clear):
-    menu_view_transactions()
+# Добавление новой транзакции
+def new_transaction():
+    transaction_date = time.time()
+    transaction_type = input('Тип транзакции --> ')
+    product_name = input('Наименование материала --> ')
+    unit_name = input('Единица измерения --> ')
+    unit_price = float(input('Цена за единицу --> '))
+    amount = float(input('Количество --> '))
+    description = input('Назначение -->')
+
+    print(transaction_date)
+
+# Основное меню модуля "Транзакции"
+def transaction(cursor, os_clear):
+    menu_transaction()
+    while True:
+        sel = input("Транзакции: --> ")
+    
+        # [mMьЬ] - Меню программы
+        if re.search(r"[mMьЬ]", sel):
+            os.system(os_clear)
+            menu_transaction()
+
+        #[qQйЙ] - Выход из подменю "Транзакции"
+        elif re.search(r"[qQйЙ]", sel):
+            os.system(os_clear)
+            break
+
+        elif sel == '1':
+            os.system(os_clear)
+            view_transaction(cursor, os_clear)
+            menu_transaction()
+
+# 1. Подменю "Просмотр транзакций"
+def view_transaction(cursor, os_clear):
+    menu_view_transaction()
     while True:
         sel = input("Просмотр транзакции --> ")
     
         # [mMьЬ] - Меню программы
         if re.search(r"[mMьЬ]", sel):
             os.system(os_clear)
-            menu_view_transactions()
+            menu_view_transaction()
 
         #[qQйЙ] - Выход из подменю "Транзакции"
         elif re.search(r"[qQйЙ]", sel):
@@ -88,7 +131,7 @@ def view_transactions(cursor, os_clear):
             cursor.execute(sql)
             data = cursor.fetchall()
             data_print(data)
-            menu_view_transactions()
+            menu_view_transaction()
      
         # Вывод транзакций по категории "Расход"
         elif sel == '2':
@@ -97,7 +140,7 @@ def view_transactions(cursor, os_clear):
             cursor.execute(sql)
             data = cursor.fetchall()
             data_print(data)
-            menu_view_transactions()
+            menu_view_transaction()
 
         # Вывод транзакций по категории "Перемещения"
         elif sel == '3':
@@ -106,4 +149,4 @@ def view_transactions(cursor, os_clear):
             cursor.execute(sql)
             data = cursor.fetchall()
             data_print(data)
-            menu_view_transactions()
+            menu_view_transaction()

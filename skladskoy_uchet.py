@@ -15,9 +15,8 @@ from sys import platform
 
 # Основное меню программы
 def menu():
-    print('1. Просмотр транзакций')
-    print('2. Новая транзакция')
-    print('3. Справочник материалов')
+    print('1. Транзакции')
+    print('2. Справочник материалов')
     print()
     print('q. Меню программы')
     print('m. Выход из программы')
@@ -48,20 +47,14 @@ while True:
         system(os_clear)
         break
 
-    # [1] - подменю "Просмотр транзакций"
+    # [1] - подменю "Транзакции"
     elif sel == '1':
         system(os_clear)
-        transactions.view_transactions(cursor, os_clear)
-        menu()
-    
-    #[2] - подменю "Новая транзакция"
-    elif sel == '2':
-        system(os_clear)
-        new_transactions.add_new_transaction(cursor, os_clear)
+        transactions.transaction(cursor, os_clear)
         menu()
 
     #[3] - подменю "Справочник материалов"
-    elif sel =='3':
+    elif sel =='2':
         system(os_clear)
         products.products(cursor, os_clear, con)
         menu()
