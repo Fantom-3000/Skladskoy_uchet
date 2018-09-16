@@ -81,10 +81,47 @@ def products(cursor, os_clear, con):
 
         # Редактирование материала
         elif sel == '2':
+            col = ProductTabel()
             os.system(os_clear)
             card_number = input("Введите номер карты: --> ")
-            
-            print(card_number)
+            sql_view_product = """SELECT card_number, product_name, unit_name, unit_price, balance
+                                  FROM products
+                                  WHERE card_number='""" + card_number + "'"
+            cursor.execute(sql_view_product)
+            data_list = cursor.fetchall()
+
+            if data_list:
+                print(data_list)
+                product_name = data_list[0][1]
+                unit_name = str(data_list[0][2])
+                unit_price = str(data_list[0][3])
+                balance = str(data_list[0][4])
+                
+                function.line_down() # ┌───────┐
+                print('│'+'Дата запроса: ' + 
+                    str(function.operation_date(time.time()).ljust(col.tabel_width-14, ' ')) + '│')
+                function.line_product_down_2() # ├──┬──┬──┤
+                print('│'+'Инв. ном.'.center(col.card_number, ' ') + '│' +
+                      'Наименование материала'.center(col.product_name, ' ') + '│' +
+                      'Ед. изм.'.center(col.unit_name, ' ') + '│' +
+                      'За ед.'.center(col.unit_price, ' ')+'│'+
+                      'Остаток'.center(col.balance, ' ')+'│')
+                function.line_product_center() # ├──┼──┼──┤
+                print('│'+card_number.rjust(col.card_number, ' ') + '│' +
+                      product_name.ljust(col.product_name, ' ') + '│' +
+                      unit_name.center(col.unit_name, ' ') + '│' +
+                      unit_price.rjust(col.unit_price, ' ') + '│' +
+                      balance.rjust(col.balance, ' ') + '│')
+                function.line_product_up() # └──┴──┴──┘
+            else:
+                print('Карты с таким номером нет в базе!')
+
+            select = input('--> (' + card_number + ')')
+            if not select:
+                print(card_number)
+            else:
+                card_number = select
+                print(card_number)
 
         # Добавление материала
         elif sel == '3':
