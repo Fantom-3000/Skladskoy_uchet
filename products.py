@@ -23,7 +23,8 @@ def menu_products():
     print('q. Предыдущее меню')
     print()
 
-sql = """SELECT products.card_number, products.product_name, products.unit_name, products.unit_price
+sql = """SELECT products.card_number, products.product_name, products.unit_name,
+                products.unit_price, products.balance
          FROM products
          ORDER BY products.card_number"""
 
@@ -50,7 +51,6 @@ def products(cursor, os_clear, con):
             os.system(os_clear)
             cursor.execute(sql)
             data = cursor.fetchall()
-            # function.products_list(data)
 
             # Вывод списка материалов
             col = ProductTabel()
@@ -64,13 +64,13 @@ def products(cursor, os_clear, con):
                   'За ед.'.center(col.unit_price, ' ')+'│'+
                   'Остаток'.center(col.balance, ' ')+'│')
             function.line_product_center() # ├──┼──┼──┤
-            balance = '0.0'
 
             for data_list in data:
                 card_number = data_list[0]
                 product_name = data_list[1]
                 unit_name = str(data_list[2])
                 unit_price = str(data_list[3])
+                balance = str(data_list[4])
                 print('│'+card_number.rjust(col.card_number, ' ') + '│' +
                       product_name.ljust(col.product_name, ' ') + '│' +
                       unit_name.center(col.unit_name, ' ') + '│' +
